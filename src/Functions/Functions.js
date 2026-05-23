@@ -62,15 +62,19 @@ export const deuxieme_etape_algo = (tableau) => {
 
 export const algo_marquage_ligne = (dataset, indice_marquage_colonne) => {
 
-    let index_marquage_ligne = -1;
+    let index_marquage_ligne = [];   
 
-    for (let k = 0; k < dataset.length; k++) {
-      
-      if(indice_marquage_colonne >= 0 && dataset[k][indice_marquage_colonne] == 'OK'){
-        dataset[k].push('+')
-        index_marquage_ligne = k
-      }
-      
+    for(let i=0; i<indice_marquage_colonne.length; i++){
+
+        for (let k = 0; k < dataset.length; k++) {
+          
+          if(dataset[k][indice_marquage_colonne[i]] == 'OK'){
+            dataset[k].push('+')
+            index_marquage_ligne.push(k)
+          }
+          
+        }
+
     }
 
     return index_marquage_ligne;
@@ -78,23 +82,91 @@ export const algo_marquage_ligne = (dataset, indice_marquage_colonne) => {
 }
 
 
-export const algo_marquage_colonne = (dataset, index_marquage_ligne) => {
+export const algo_marquage_colonne = (dataset, index_marquage_ligne, tableau_initial) => {
 
-  let indice_marquage_colonne = -1;
-  // console.log('index marquage ligne :', index_marquage_ligne);
+  let indice_marquage_colonne = [];
+  
+  for(let i=0; i<index_marquage_ligne.length; i++){
+      let tab = [];
 
-  for (let j = 0; j < dataset[0].length; j++) {
+      for (let j = 0; j < dataset.length; j++) {
+      
+        if(dataset[index_marquage_ligne[i]].reduce((acc, elem, k) => (elem == 'Ø' ? [...acc, k] : acc), []).includes(j) ){
 
-    if(  index_marquage_ligne >=0 && j ==  dataset[index_marquage_ligne].indexOf('Ø') ){
+          if(dataset[dataset.length - 1][j] == ''){
+            dataset[dataset.length - 1][j] = '+'
+          }else{
+            dataset[dataset.length - 1][j] += '\n+'
+          }
 
-      dataset[dataset.length - 1][j] = '+'
-      indice_marquage_colonne = j
+          indice_marquage_colonne.push(j)
+        }
+        
+      }
+
+  }
+  
+  return indice_marquage_colonne;
+}
+
+
+export const identifier_les_lignes_contenant_un_seul_zero = (tableau) => {
+let dataset = tableau.map(row => [...row]);
+
+for (let i = 0; i < dataset.length; i++) {
+  
+  const count = dataset[i].filter(x => x==0).length
+  if(count == 1){
+    const index = dataset[i].indexOf(0)
+    
+    dataset[i][index] = "OK"
+    i = -1;
+
+    for (let j = 0; j < dataset.length; j++) {
+      if(dataset[j][index] == 0){
+        dataset[j][index] = 'Ø'
+      }
+      
+    }
+
+  }
+  
+}
+return dataset;
+}
+
+
+export const identifier_les_lignes_contenant_plusieurs_zero = (tableau) => {
+  let dataset = tableau.map(row => [...row]);
+
+  for (let i = 0; i < dataset.length; i++) {
+
+    const count = dataset[i].filter(x => x==0).length
+    
+    if(count > 1){
+
+      const indexes = dataset[i].map((val, j) => val === 0 ? j : -1).filter(j => j !== -1)
+      
+      dataset[i][indexes[0]] = "OK"
+      
+      // Barrer les zero sur la ligne
+      for (let k = 1; k < indexes.length; k++) {
+        dataset[i][indexes[k]] = 'Ø'
+      }
+
+      // Barrer les zero sur la colonne
+      for (let l = 0; l < dataset.length; l++) {
+        
+        if(dataset[l][indexes[0]] == 0){
+          dataset[l][indexes[0]] = 'Ø'
+        }
+        
+      }
 
     }
-    
+    dataset = identifier_les_lignes_contenant_un_seul_zero(dataset)
+
   }
 
-  return indice_marquage_colonne;
-
-  
+  return dataset;
 }
