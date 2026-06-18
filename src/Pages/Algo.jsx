@@ -641,20 +641,20 @@ export default function Algo() {
 
   return (
     <>
-      {/* <Navbar dimension={dimension} setDimension={setDimension}/> */}
-      <div className="w-2/4 min-w-[310px] pb-[70px] min-h-screen gap-2 mx-auto rounded-sl relative max-xl:flex-wrap max-sm:w-full">
+      
+      <div className="w-[750px] max-md:w-full pb-[100px] min-h-screen mx-auto rounded-sl relative">
 
         {/* Manipulation - item 1 */}
         <div className="relative">
           
           <div className="">
-              <p className="text-lg font-semibold italic py-2">Problème d'affectation</p>
+              <p className="text-lg text-center font-semibold italic py-2">Problème d'affectation</p>
 
             {/* Formulaire de manipulation */}
-              <form className="bg-white mx-auto py-1 rounded-sm shadow-sm flex gap-6 justify-center items-center" onSubmit={etape.current >= 1 && result.length == 0 ? handleSubmit : reinitialisation}>
+              <form className="flex flex-wrap gap-6 justify-center items-center bg-white mx-auto rounded-sm max-sm:px-2 sm:shadow-sm sm:py-4" onSubmit={etape.current >= 1 && result.length == 0 ? handleSubmit : reinitialisation}>
 
                 {/* Algorithme */}
-                <div className="bloc-algorithme flex items-center gap-2 max-sm:text-xs">
+                <div className="bloc-algorithme flex items-center gap-2 max-md:text-sm max-sm:text-xs">
 
                   <label className="block my-1 font-semibold">Algorithme :</label>
                   {
@@ -677,11 +677,11 @@ export default function Algo() {
                 </div>
 
                 {/* Bouton (Demarrer et Reinitialiser) */}
-                <div className="my-2 flex gap-4 justify-center items-center max-sm:text-sm">
+                <div className="flex gap-4 justify-center items-center">
 
                   <button 
                     type="submit"
-                    className={`text-sm px-6 py-2 rounded-lg ${result.length > 0 ? 'bg-orange-100 cursor-not-allowed text-orange-300' : 'bg-orange-400 text-white cursor-pointer duration-150 ease-out hover:bg-orange-500'}`}
+                    className={`text-sm max-sm:text-xs px-6 py-2 rounded-lg ${result.length > 0 ? 'bg-orange-100 cursor-not-allowed text-orange-300' : 'bg-orange-400 text-white cursor-pointer duration-150 ease-out hover:bg-orange-500'}`}
                     disabled={result.length > 0}
                   >
                 
@@ -694,7 +694,7 @@ export default function Algo() {
 
                   <button 
                     type="button"
-                    className={`text-sm px-6 py-2 rounded-lg ${result.length == 0 ? 'bg-red-100 cursor-not-allowed text-red-300' : 'bg-red-400 text-white cursor-pointer duration-150 ease-out hover:bg-red-500'}`}
+                    className={`text-sm max-sm:text-xs px-6 py-2 rounded-lg ${result.length == 0 ? 'bg-red-100 cursor-not-allowed text-red-300' : 'bg-red-400 text-white cursor-pointer duration-150 ease-out hover:bg-red-500'}`}
                     onClick={reinitialisation}
                     disabled={result.length == 0}
                   >
@@ -725,13 +725,13 @@ export default function Algo() {
               
                 {
                   isMinSize && (
-                    <p className="text-red-500 text-center">Vous avez déjà atteint la dimension minimale : {dimension}</p>
+                    <p className="text-red-500 text-center max-sm:text-xs">Vous avez déjà atteint la dimension minimale : {dimension}</p>
                   )
                 }
 
                 {
                   isMaxSize && (
-                    <p className="text-red-500 text-center">Vous avez déjà atteint la dimension maximale : {dimension}</p>
+                    <p className="text-red-500 text-center max-sm:text-xs">Vous avez déjà atteint la dimension maximale : {dimension}</p>
                   )
                 }
 
@@ -755,7 +755,7 @@ export default function Algo() {
                         {row.map((val, j) => (
                           <td key={j} className={`border border-orange-300 text-center bg-white`}>
                               <input
-                              className="px-1 w-[48px] max-sm:w-[35px] outline-blue-700 text-center"
+                              className="px-1 w-[48px] max-sm:w-[38px] outline-blue-700 text-center"
                                 type="number"
                                 placeholder={`${agent[i]}${tache[j]}`}
                                 value={val}
@@ -969,7 +969,7 @@ export default function Algo() {
 
         {/* Résultat */}
         <div className="mx-auto my-4 rounded-lg px-4">
-          <p className="underline text-xl">Résultat : </p>
+          <p className="underline text-xl max-sm:text-sm">Résultat : </p>
           {/* Cout total */}
             
 
@@ -1049,7 +1049,7 @@ export default function Algo() {
           {
             algo == '' && result.length == 0 && (
               <div className="my-2">
-                <p className="text-xl text-red-400">
+                <p className="text-xl max-sm:text-lg text-red-400">
                   <span className="icon mr-2">
                     <i className="fas fa-times"></i>
                   </span>
@@ -1061,7 +1061,7 @@ export default function Algo() {
         </div>
 
 
-        <div className="w-2/4 py-2 fixed bottom-0 rounded-sm shadow-sm" style={{background: '#ECF3F2'}}>
+        <div className="w-[750px] max-md:w-full py-2 fixed bottom-0 rounded-sm shadow-sm" style={{background: '#ECF3F2'}}>
           <Navbar dimension={dimension} setDimension={setDimension} etape={etape} result={result} type_resolution={type_resolution} setTypeResolution={setTypeResolution}/>
         </div>
 

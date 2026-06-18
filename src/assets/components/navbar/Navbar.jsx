@@ -8,11 +8,11 @@ export default function ({dimension, setDimension, etape, result, type_resolutio
     }
 
   return (
-    <div className='px-6 flex items-center'>
+    <div className='px-6 flex flex-wrap items-center'>
 
         {/* Action */}
-        <div className="flex-1 bloc-action flex items-center gap-4 text-base">
-            <label htmlFor="etape">
+        <div className="flex-1 min-w-[300px] bloc-action flex items-center gap-4 text-base">
+            <label htmlFor="etape" className='max-md:text-sm max-sm:text-xs'>
                 <input 
                     className='mx-1'
                     type="radio"
@@ -24,7 +24,7 @@ export default function ({dimension, setDimension, etape, result, type_resolutio
                 />
                 Etape par étape
             </label>
-            <label htmlFor="resultat">
+            <label htmlFor="resultat" className='max-md:text-sm max-sm:text-xs'>
                 <input 
                     className='mx-1'
                     type="radio"
@@ -40,15 +40,15 @@ export default function ({dimension, setDimension, etape, result, type_resolutio
         </div>
 
     
-        <div className="py-2 flex items-center gap-2">
-            <label className="block my-2 font-semibold">Dimension : </label>
+        <div className="p-2 flex items-center gap-4">
+            <label className="block my-2 font-semibold max-md:text-sm max-sm:text-xs">Dimension : </label>
 
             <div className="flex items-center gap-2">
 
                 <div className="">
                     <input 
                     type="number" 
-                    className="w-12 h-8 bg-white border border-gray-200 rounded-sm text-center"
+                    className="p-2 bg-white border border-gray-200 rounded-sm text-center max-md:text-sm max-sm:text-xs"
                     value={dimension}
                     onChange={handleChange}
                     min="4"
@@ -64,7 +64,7 @@ export default function ({dimension, setDimension, etape, result, type_resolutio
                 <div className="">
                     <input 
                     type="number" 
-                    className="w-12 h-8 bg-white border border-gray-200 rounded-sm text-center"
+                    className="p-2 bg-white border border-gray-200 rounded-sm text-center max-md:text-sm max-sm:text-xs"
                     value={dimension}
                     onChange={handleChange}
                     min="4"
